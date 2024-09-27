@@ -8,7 +8,6 @@ import Menu from './Menu';
 
 function App() {
   const [view, setView] = useState('Default');
-  const [frameloop, setFrameloop] = useState('never')
 
   console.log(view)
 
@@ -18,15 +17,14 @@ function App() {
   return (
     <div style={{ width: '100vw', height: '100vh' }}>
       <Menu setView={setView} view={view} />
-      <Canvas frameloop={frameloop}
-  onClick={() => setFrameloop('always')} camera={{ position: [0, 0, 5] }} style={{ background: 'black' }}>
+      <Canvas frameloop={'demand'} camera={{ position: [0, 0, 5] }} style={{ background: 'black' }}>
         <Lights />
 
 
         <Brain name={view} />
 
         <gridHelper args={[100, 100, 'cyan', 'cyan']} position={[0, -3, 0]} />
-        <OrbitControls enablePan={true} />
+        <OrbitControls />
       </Canvas>
     </div>
   );
