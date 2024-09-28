@@ -30,7 +30,7 @@ const controlPanelStyles = {
   top: '20px',
   left: '20px',
   zIndex: 10,
-  backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  backgroundColor: 'rgba(255, 255, 255, 0.25)',
   padding: '10px',
   borderRadius: '8px',
   display: 'flex',

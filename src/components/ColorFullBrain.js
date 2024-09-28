@@ -7,12 +7,9 @@ const ColorFullBrain = (props) => {
   const { nodes, materials } = useGLTF(
     "/models/cfbrain.glb"
   );
-  console.log(nodes.Scene)
 
   const RenderItem = (item) => {
-    return <mesh key={item.uuid}
-      geometry={item.geometry} material={item.material}
-    >
+    return <mesh key={item.uuid} geometry={item.geometry} material={item.material}>
       <DissolveMaterial
         baseMaterial={item.material}
         visible={props.dissolveVisible}
@@ -39,5 +36,20 @@ const ColorFullBrain = (props) => {
   );
 }
 
-
 export default ColorFullBrain
+
+// const [clicked, setClicked] = useState(false)
+// const markerRef = useRef()
+// const vec = new THREE.Vector3()
+
+// console.log(item)
+
+// useFrame(state => {
+//   if (clicked) {
+//     state.camera.lookAt(markerRef.current.position)
+//     state.camera.position.lerp(vec.set(5,5,5), 0.01)
+//     state.camera.updateProjectionMatrix()
+//   }
+//   return null
+// })
+// ref={markerRef} onClick={() => setClicked(!clicked)}

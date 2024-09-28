@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 
-console.log = console.warn = console.error = () => {};
+// console.log = console.warn = console.error = () => {};
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

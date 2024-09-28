@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
 
@@ -9,6 +9,7 @@ import { Bloom, EffectComposer } from '@react-three/postprocessing';
 import FullBrain from './components/FullBrain';
 import SliceBrain from './components/SliceBrain';
 import ControlPanelToggle from './components/ControlPanelToggle';
+import BrainMenu from './components/BrainMenu';
 
 useGLTF.preload("/models/cfbrain.glb");
 useGLTF.preload("/models/sfbrain.glb");
@@ -25,13 +26,14 @@ function App() {
     if (view+colorMode!==itemDisplayed) {
       setItemDisplayed(view+colorMode)
     }
-  }, [view, colorMode])
+  }, [view, colorMode, itemDisplayed])
 
   const [visibleItem, setVisibleItem] = useState(itemDisplayed);
   const onFadeOut = () => setVisibleItem(view+colorMode);
 
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
+      <BrainMenu />
       <ControlPanelToggle view={view} setView={setView} colorMode={colorMode} setColorMode={setColorMode} />
 
       <Canvas camera={{ position: [-5, 0, -6], fov: 42 }} style={{ background: 'black' }}>
