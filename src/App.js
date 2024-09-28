@@ -1,23 +1,75 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { Environment, OrbitControls, useGLTF } from '@react-three/drei';
+
+import Lights from './components/Lights';
+import ColorFullBrain from './components/ColorFullBrain';
+import ColorSliceBrain from './components/ColorSliceBrain';
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import FullBrain from './components/FullBrain';
+import SliceBrain from './components/SliceBrain';
+import ControlPanelToggle from './components/ControlPanelToggle';
+
+useGLTF.preload("/models/cfbrain.glb");
+useGLTF.preload("/models/sfbrain.glb");
+useGLTF.preload("/models/fbrain.glb");
+useGLTF.preload("/models/sbrain.glb");
 
 function App() {
+  const [view, setView] = useState('full');
+  const [colorMode, setColorMode] = useState('color');
+
+  const [itemDisplayed, setItemDisplayed] = useState(view+colorMode)
+
+  useEffect(() => {
+    if (view+colorMode!==itemDisplayed) {
+      setItemDisplayed(view+colorMode)
+    }
+  }, [view, colorMode])
+
+  const [visibleItem, setVisibleItem] = useState(itemDisplayed);
+  const onFadeOut = () => setVisibleItem(view+colorMode);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
+      <ControlPanelToggle view={view} setView={setView} colorMode={colorMode} setColorMode={setColorMode} />
+
+      <Canvas camera={{ position: [-5, 0, -6], fov: 42 }} style={{ background: 'black' }}>
+        {visibleItem === "fullcolor" && (
+          <ColorFullBrain
+            dissolveVisible={itemDisplayed === "fullcolor"}
+            onFadeOut={onFadeOut}
+          />
+        )}
+        {visibleItem === "slicecolor" && (
+          <ColorSliceBrain
+            dissolveVisible={itemDisplayed === "slicecolor"}
+            onFadeOut={onFadeOut}
+          />
+        )}
+        {visibleItem === "fullnoColor" && (
+          <FullBrain
+            dissolveVisible={itemDisplayed === "fullnoColor"}
+            onFadeOut={onFadeOut}
+          />
+        )}
+        {visibleItem === "slicenoColor" && (
+          <SliceBrain
+            dissolveVisible={itemDisplayed === "slicenoColor"}
+            onFadeOut={onFadeOut}
+          />
+        )}
+
+
+        <Lights />
+        <gridHelper args={[100, 100, 'cyan', 'cyan']} position={[0, -3, 0]} />
+        
+        <EffectComposer>
+          <Bloom luminanceThreshold={1} intensity={0.5} mipmapBlur />
+        </EffectComposer>
+
+        <OrbitControls />
+      </Canvas>
     </div>
   );
 }
