@@ -48,7 +48,7 @@ const BrainMenu = () => {
               </button>
             </div>
             {visibleDescriptions[index] && (
-              <div className="brain-description">
+              <div className="brain-description" style={{borderLeft: '3px solid '+part.color}}>
                 {part.description}
               </div>
             )}
