@@ -11,10 +11,10 @@ import SliceBrain from './components/SliceBrain';
 import ControlPanelToggle from './components/ControlPanelToggle';
 import BrainMenu from './components/BrainMenu';
 
-useGLTF.preload("/models/cfbrain.glb");
-useGLTF.preload("/models/sfbrain.glb");
-useGLTF.preload("/models/fbrain.glb");
-useGLTF.preload("/models/sbrain.glb");
+// useGLTF.preload("/models/cfbrain.glb");
+// useGLTF.preload("/models/sfbrain.glb");
+// useGLTF.preload("/models/fbrain.glb");
+// useGLTF.preload("/models/sbrain.glb");
 
 function App() {
   const [view, setView] = useState('full');

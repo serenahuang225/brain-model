@@ -1,34 +1,23 @@
 import { useGLTF } from "@react-three/drei";
 import React, { useRef } from "react";
 import { DissolveMaterial } from "./DissolveMaterial";
+import RenderBrainMesh from "./RenderBrainMesh";
 
 const ColorSliceBrain = (props) => {
   const group = useRef();
   const { nodes, materials } = useGLTF(
     "/models/csbrain.glb"
   );
-  console.log(nodes.Scene)
-
-  const RenderItem = (item) => {
-    return <mesh key={item.uuid}
-      geometry={item.geometry} material={item.material}
-    >
-      <DissolveMaterial
-        baseMaterial={item.material}
-        visible={props.dissolveVisible}
-        onFadeOut={props.onFadeOut}
-        color="#9c2d2d"
-      />
-    </mesh>
-  }
 
   const renderItems = nodes.Scene.children.map(item => {
     if (item?.isGroup) {
       return item.children.map(i => {
-        return RenderItem(i)
+        return <RenderBrainMesh
+          color={"#9c2d2d"} item={i} vis={props.dissolveVisible} onFadeOut={props.onFadeOut}/>
       })
     } else {
-      return RenderItem(item)
+      return <RenderBrainMesh
+        color={"#9c2d2d"} item={item} vis={props.dissolveVisible} onFadeOut={props.onFadeOut}/>
     }
   })
 
