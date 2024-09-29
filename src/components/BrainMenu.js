@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './BrainMenu.css';  // Assuming you will add some custom styles
-import { useThree } from '@react-three/fiber';
 
 const allBrainParts = [
   { name: 'Cerebrum', color: '#E7B4C9', description: 'The largest brain part, responsible for thought and sensory processing.' },
@@ -23,7 +22,7 @@ const allBrainParts = [
   { name: 'Pituitary Gland', color: '#DBE700', description: 'The "master gland" that regulates hormones in the body.' },
 ];
 
-const BrainMenu = ({toggle, show, camera}) => {
+const BrainMenu = ({toggle, show }) => {
   const [visibleDescriptions, setVisibleDescriptions] = useState({});
 
   const toggleDescription = (index, part) => {
