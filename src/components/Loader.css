@@ -3,7 +3,6 @@
   background-color: transparent;
   border-width: 5px;
   border-color: cyan;
-  border-radius: 10px;
   overflow: hidden;
   margin: 20px 0;
 }
@@ -14,5 +13,4 @@
   text-align: center;
   line-height: 25px;
   transition: width 0.3s ease;
-  border-radius: 10px 0 0 10px;
 }

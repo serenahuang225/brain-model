@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import './BrainMenu.css';  // Assuming you will add some custom styles
 
-const brainParts = [
+const allBrainParts = [
   { name: 'Frontal Lobe', color: '#7B00E7', description: 'The frontal lobe is involved in reasoning, motor control, emotion, and language.' },
   { name: 'Parietal Lobe', color: '#39D3E7', description: 'The parietal lobe processes sensory information like touch, temperature, and pain.' },
   { name: 'Occipital Lobe', color: '#BC070B', description: 'The occipital lobe is the visual processing center of the brain.' },
   { name: 'Temporal Lobe', color: '#26E700', description: 'The temporal lobe is important for processing auditory information and memory.' },
-  { name: 'Somatosensory Cortex', color: '#3471E7', description: '' },
+  { name: 'Sensory Cortex', color: '#3471E7', description: '' },
   { name: 'Motor Cortex', color: '#CF5EA2', description: '' },
   { name: "Broca's Area", color: '#E7A111', description: 'Key for speech production and language formation. Located in the left frontal lobe.' },
   { name: 'Wernicke\'s Area', color: '#DBE700', description: 'Important for language comprehension and understanding. Located in the left temporal lobe.' },
@@ -22,12 +22,13 @@ const brainParts = [
   { name: 'Pituitary Gland', color: '#DBE700', description: 'The "master gland" that regulates hormones in the body.' },
 ];
 
-const BrainMenu = () => {
+const BrainMenu = ({toggle, show}) => {
   // State to track which description is visible
   const [visibleDescriptions, setVisibleDescriptions] = useState({});
 
   // Toggle the description visibility
   const toggleDescription = (index) => {
+
     setVisibleDescriptions((prev) => ({
       ...prev,
       [index]: !prev[index]  // Toggle the current visibility state
@@ -35,27 +36,41 @@ const BrainMenu = () => {
   };
 
   return (
-    <div className="brain-menu">
-      <h2>Brain Parts</h2>
-      <ul>
-        {brainParts.map((part, index) => (
-          <li key={index}>
-            <div className="brain-part-header">
-              <div style={{height: '20px', width: '20px', borderRadius: '10px', backgroundColor: part.color}} />
-              <span>{part.name}</span>
-              <button onClick={() => toggleDescription(index)}>
-                {visibleDescriptions[index] ? 'Hide' : 'Show More'}
-              </button>
-            </div>
-            {visibleDescriptions[index] && (
-              <div className="brain-description" style={{borderLeft: '3px solid '+part.color}}>
-                {part.description}
+    <>
+    {
+      show ? <div className="brain-menu">
+        <button onClick={toggle} className='exit-button'>
+          <div style={{color: 'white', fontSize: 'xx-large'}}>x</div>
+        </button>
+        <h2>Brain Parts</h2>
+        <ul>
+          {allBrainParts.map((part, index) => (
+            <li key={index}>
+              <div className="brain-part-header">
+                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px'}}>
+                  <div style={{height: '20px', width: '20px', borderRadius: '10px', backgroundColor: part.color}} />
+                  <span>{part.name}</span>
+                </div>
+                <button onClick={() => toggleDescription(index)}>
+                  {visibleDescriptions[index] ? 'Hide' : 'Show More'}
+                </button>
               </div>
-            )}
-          </li>
-        ))}
-      </ul>
-    </div>
+              {visibleDescriptions[index] && (
+                <div className="brain-description" style={{borderLeft: '3px solid '+part.color}}>
+                  {part.description}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div> :
+      <div className='brain-menu-small'>
+        <button onClick={toggle} className='exit-button'>
+          <div style={{color: 'white', fontSize: 'xx-large'}}>🗺️</div>
+        </button>
+      </div>
+    }
+    </>
   );
 };
 
