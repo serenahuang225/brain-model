@@ -82,3 +82,14 @@
   color: #c5c5c5;
   padding-left: 10px;
 }
+
+a {
+  color: white;
+  text-decoration: underline;
+}
+
+.footer {
+  color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
