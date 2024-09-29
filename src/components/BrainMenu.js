@@ -60,6 +60,7 @@ const BrainMenu = ({toggle, show, camera}) => {
             </li>
           ))}
         </ul>
+        <p className='footer'>Code on <span><a target="_blank" rel="noopener noreferrer" href='https://github.com/serenahuang225/brain-model'>Github</a></span></p>
       </div> :
       <div className='brain-menu-small'>
         <button onClick={toggle} className='exit-button'>
