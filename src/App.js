@@ -10,6 +10,7 @@ import FullBrain from './components/FullBrain';
 import SliceBrain from './components/SliceBrain';
 import ControlPanelToggle from './components/ControlPanelToggle';
 import BrainMenu from './components/BrainMenu';
+import Loader from './components/Loader';
 
 // useGLTF.preload("/models/cfbrain.glb");
 // useGLTF.preload("/models/sfbrain.glb");
@@ -19,11 +20,11 @@ import BrainMenu from './components/BrainMenu';
 function App() {
   const [view, setView] = useState('full');
   const [colorMode, setColorMode] = useState('color');
+  const [isLoading, setIsLoading] = useState(true);
 
   const [itemDisplayed, setItemDisplayed] = useState(view+colorMode)
 
   // TODO:
-  // update descriptions
   // loader in beginning
 
   useEffect(() => {
@@ -42,25 +43,25 @@ function App() {
 
       <Canvas camera={{ position: [-5, 0, -6], fov: 42 }} style={{ background: 'black' }}>
         <Suspense fallback={null}>
-          {visibleItem === "fullcolor" && (
+          {!isLoading && visibleItem === "fullcolor" && (
             <ColorFullBrain
               dissolveVisible={itemDisplayed === "fullcolor"}
               onFadeOut={onFadeOut}
             />
           )}
-          {visibleItem === "slicecolor" && (
+          {!isLoading && visibleItem === "slicecolor" && (
             <ColorSliceBrain
               dissolveVisible={itemDisplayed === "slicecolor"}
               onFadeOut={onFadeOut}
             />
           )}
-          {visibleItem === "fullnoColor" && (
+          {!isLoading && visibleItem === "fullnoColor" && (
             <FullBrain
               dissolveVisible={itemDisplayed === "fullnoColor"}
               onFadeOut={onFadeOut}
             />
           )}
-          {visibleItem === "slicenoColor" && (
+          {!isLoading && visibleItem === "slicenoColor" && (
             <SliceBrain
               dissolveVisible={itemDisplayed === "slicenoColor"}
               onFadeOut={onFadeOut}
@@ -78,6 +79,7 @@ function App() {
 
         <OrbitControls />
       </Canvas>
+      <Loader onLoadingComplete={() => setIsLoading(false)} />
     </div>
   );
 }
