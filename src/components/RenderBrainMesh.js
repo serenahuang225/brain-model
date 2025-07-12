@@ -12,9 +12,13 @@ const RenderBrainMesh = ({item, vis, onFadeOut, color}) => {
   //   item.material.emissiveIntensity = 0;
   // }
 
-  return <mesh key={item.uuid}
-  // onPointerEnter={onHover} onPointerLeave={onHoverOut}
-    geometry={item.geometry} material={item.material}
+  return <mesh 
+    key={item.uuid}
+    // onPointerEnter={onHover} onPointerLeave={onHoverOut}
+    geometry={item.geometry} 
+    material={item.material}
+    castShadow
+    receiveShadow
   >
     <DissolveMaterial
       baseMaterial={item.material}

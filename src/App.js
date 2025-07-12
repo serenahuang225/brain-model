@@ -41,7 +41,16 @@ function App() {
       <BrainMenu toggle={() => setShowMenu(prev => !prev)} show={showMenu} />
       <ControlPanelToggle view={view} setView={setView} colorMode={colorMode} setColorMode={setColorMode} />
 
-      <Canvas camera={{ position: [-5, 0, -6], fov: 42 }} style={{ background: 'black' }}>
+      <Canvas 
+        camera={{ position: [-5, 0, -6], fov: 42 }} 
+        style={{ background: 'black' }}
+        shadows
+        gl={{ 
+          antialias: true,
+          alpha: false,
+          powerPreference: "high-performance"
+        }}
+      >
         <Suspense fallback={null}>
           {!isLoading && visibleItem === "fullcolor" && (
             <ColorFullBrain
@@ -71,7 +80,11 @@ function App() {
 
 
         <Lights />
-        <gridHelper args={[100, 100, 'cyan', 'cyan']} position={[0, -3, 0]} />
+        <gridHelper 
+          args={[100, 100, '#4a90e2', '#2d5aa0']} 
+          position={[0, -3, 0]} 
+          receiveShadow
+        />
         
         <EffectComposer>
           <Bloom luminanceThreshold={1} intensity={0.5} mipmapBlur />

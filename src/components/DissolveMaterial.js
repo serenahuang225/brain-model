@@ -79,6 +79,9 @@ export function DissolveMaterial({
         uniforms={uniforms.current}
         toneMapped={false}
         transparent
+        roughness={0.3}
+        metalness={0.3}
+        envMapIntensity={1.2}
       />
     </>
   );
